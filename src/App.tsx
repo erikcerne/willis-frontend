@@ -1,6 +1,19 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const callApi = async () => {
+    try {
+      const token = await getAccessTokenSilently();
+      console.log("Här är din JWT-nyckel:", token);
+      // Här kommer du senare göra: fetch(url, { headers: { Authorization: `Bearer ${token}` } })
+    } catch (error) {
+      console.error("Kunde inte hämta nyckel:", error);
+    }
+  };
+
+
   const { isLoading, isAuthenticated, error, loginWithRedirect, logout, user } =
     useAuth0();
 
@@ -36,6 +49,7 @@ function App() {
           </button>
         </div>
       )}
+      <button onClick={callApi}>Hämta API-nyckel</button>
     </div>
   );
 }

@@ -2,21 +2,16 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { Auth0Provider } from "@auth0/auth0-react";
-const domainEnv = import.meta.env.VITE_AUTH0_DOMAIN;
-const clientIdEnv = import.meta.env.VITE_AUTH0_CLIENT_ID;
-const audienceEnv = import.meta.env.VITE_AUTH0_AUDIENCE;
 
-const rootElement = document.getElementById("root")!;
-const root = createRoot(rootElement);
-
-root.render(
+// Vi hårdkodar värdena precis just nu bara för att se att det hoppar igång
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Auth0Provider
-      domain={domainEnv}
-      clientId={clientIdEnv}
+      domain="dev-jnlbp5hqfmbs1xp1.us.auth0.com"
+      clientId="N5J0tqX3JpdJ8t5hxrUhHKHN8EiWLxEV"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: audienceEnv,
+        audience: "https://willis-api/", // Denna rad aktiverar "nyckeln" till backenden
       }}
     >
       <App />
