@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 function App() {
   const {
@@ -19,7 +20,7 @@ function App() {
           const token = await getAccessTokenSilently();
 
           const response = await fetch(
-            "http://localhost:8080/api/users/register",
+            `${baseUrl}/users/register`,
             {
               method: "POST",
               headers: {
