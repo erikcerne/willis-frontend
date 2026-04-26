@@ -1,55 +1,91 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
 function App() {
-  const { getAccessTokenSilently } = useAuth0();
+  const { 
+    isAuthenticated, 
+    loginWithRedirect, 
+    logout, 
+    user, 
+    getAccessTokenSilently,
+    isLoading 
+  } = useAuth0();
 
-  const callApi = async () => {
-    try {
-      const token = await getAccessTokenSilently();
-      console.log("Här är din JWT-nyckel:", token);
-      // Här kommer du senare göra: fetch(url, { headers: { Authorization: `Bearer ${token}` } })
-    } catch (error) {
-      console.error("Kunde inte hämta nyckel:", error);
-    }
-  };
+  useEffect(() => {
+    const syncUser = async () => {
+      if (isAuthenticated) {
+        try {
+          console.log("Försöker hämta token och synka användare...");
+          const token = await getAccessTokenSilently();
+          
+          const response = await fetch("http://localhost:8080/api/register", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+            }
+          });
 
+          if (response.ok) {
+            console.log("Användaren är nu registrerad/inloggad i databasen!");
+          } else {
+            console.error("Backenden svarade med felkod:", response.status);
+          }
+        } catch (error) {
+          console.error("Synkning misslyckades:", error);
+        }
+      }
+    };
 
-  const { isLoading, isAuthenticated, error, loginWithRedirect, logout, user } =
-    useAuth0();
+    syncUser();
+  }, [isAuthenticated, getAccessTokenSilently]);
 
-  if (isLoading) return <div>Laddar...</div>;
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div>Laddar Willis...</div>
+      </div>
+    );
+  }
+  
+
+  if (!isAuthenticated) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '100px', fontFamily: 'sans-serif' }}>
+        <h1>Välkommen till Willis</h1>
+        <p>Logga in för att hantera ditt skafferi och minska matsvinn</p>
+        <button 
+          onClick={() => loginWithRedirect()}
+          style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
+        >
+          Logga in eller Skapa konto
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ padding: "20px" }}>
-      {isAuthenticated && user ? (
+    <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
+      <nav style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
         <div>
-          <p>Inloggad som: {user.email}</p>
-          <h1>Användarprofil</h1>
-          <pre>{JSON.stringify(user, null, 2)}</pre>
-          <button
-            onClick={() =>
-              logout({ logoutParams: { returnTo: window.location.origin } })
-            }
-          >
+          <strong>Willis Skafferi</strong>
+        </div>
+        <div>
+          <span style={{ marginRight: '15px' }}>Inloggad som: {user?.name || user?.email}</span>
+          <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
             Logga ut
           </button>
         </div>
-      ) : (
-        <div>
-          {error && <p style={{ color: "red" }}>Fel: {error.message}</p>}
-          <button onClick={() => loginWithRedirect()}>Logga in</button>
-          <button
-            onClick={() =>
-              loginWithRedirect({
-                authorizationParams: { screen_hint: "signup" },
-              })
-            }
-          >
-            Skapa konto
-          </button>
+      </nav>
+
+      <main style={{ marginTop: '20px' }}>
+        <h1>Ditt Skafferi</h1>
+        <div style={{ backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px' }}>
+          <p>Här kommer dina matvaror att visas.</p>
+          <p>Backend-ID (sub): <code>{user?.sub}</code></p>
+
         </div>
-      )}
-      <button onClick={callApi}>Hämta API-nyckel</button>
+      </main>
     </div>
   );
 }
