@@ -1,13 +1,10 @@
-// src/components/Header.tsx
-import { useAuth } from "../hooks/useAuth"; // Justera sökvägen om det behövs
+import { useAuth } from "../hooks/useAuth";
 
 export const Header = () => {
   const { isAuthenticated, login, logout } = useAuth();
 
   return (
-    // bg-willys-red och text-white för Willys-looken
     <div className="navbar bg-willys-red text-white shadow-sm min-h-16 px-4">
-      {/* Vänster sida: Mock-profilknapp */}
       <div className="navbar-start">
         <button className="btn btn-ghost btn-circle text-white">
           <svg
@@ -27,12 +24,6 @@ export const Header = () => {
         </button>
       </div>
 
-      {/* Mitten: Titel "Hem" */}
-      <div className="navbar-center">
-        <h1 className="text-xl font-semibold text-white">Hem</h1>
-      </div>
-
-      {/* Höger sida: Logga in/ut */}
       <div className="navbar-end">
         {isAuthenticated ? (
           <button

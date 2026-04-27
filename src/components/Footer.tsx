@@ -3,7 +3,6 @@ import { Link } from "@tanstack/react-router";
 export const Footer = () => {
   return (
     <div className="grid grid-cols-5 bg-white border-t border-base-200 h-20 min-h-20 w-full pb-2 shadow-[0_-4px_10px_rgba(0,0,0,0.03)]">
-      {/* 1. Hem */}
       <Link
         to="/"
         className="flex flex-col items-center justify-center text-gray-400 [&.active]:text-willys-red transition-colors"
@@ -25,7 +24,6 @@ export const Footer = () => {
         <span className="text-[10px] mt-1 font-medium">Hem</span>
       </Link>
 
-      {/* 2. Erbjudanden (ETT VANLIGT %-TECKEN) */}
       <button className="flex flex-col items-center justify-center text-gray-400 hover:text-willys-red transition-colors">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +42,6 @@ export const Footer = () => {
         <span className="text-[10px] mt-1 font-medium">E-handel</span>
       </button>
 
-      {/* 3. E-handel (KLASSISK KUNDVAGN) */}
       <button className="flex flex-col items-center justify-center text-gray-400 hover:text-willys-red transition-colors">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +60,6 @@ export const Footer = () => {
         <span className="text-[10px] mt-1 font-medium">Erbjudanden</span>
       </button>
 
-      {/* 4. Inköpslista */}
       <Link
         to="/shoppingList"
         className="flex flex-col items-center justify-center text-gray-400 [&.active]:text-willys-red transition-colors"
@@ -85,7 +81,6 @@ export const Footer = () => {
         <span className="text-[10px] mt-1 font-medium">Inköpslista</span>
       </Link>
 
-      {/* 5. Skafferi */}
       <Link
         to="/inventory"
         className="flex flex-col items-center justify-center text-gray-400 [&.active]:text-willys-red transition-colors"

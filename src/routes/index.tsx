@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-import willysLogo from "../assets/IMG_9084.jpg";
+import willys from "../assets/IMG_9084.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -10,12 +9,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="flex flex-col items-center bg-white">
-      <img
-        src={willysLogo}
-        alt="Willys"
-        className="w-full h-auto object-cover"
-      />
+      <img src={willys} alt="Willys" className="w-full h-auto object-cover" />
     </div>
   );
-  
 }
