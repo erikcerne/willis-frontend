@@ -1,4 +1,3 @@
-@import "tailwindcss";
-
-/* Vi tvingar fram den exakta sökvägen till CSS-filen i node_modules */
-@import "../node_modules/daisyui/dist/full.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
