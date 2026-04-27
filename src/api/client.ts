@@ -1,1 +1,0 @@
-// Grundinställningar för API-anrop
