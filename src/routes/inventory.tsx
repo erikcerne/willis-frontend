@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery } from "@tanstack/react-query";
-import { inventoryQuery } from "../features/inventory/api.ts";
+import { inventoryQuery, useAddToInventory } from "../features/inventory/api.ts";
+import { ItemCard } from "../features/inventory/ItemCard.tsx";
 
 export const Route = createFileRoute("/inventory")({
   component: Inventory,
@@ -19,28 +20,20 @@ function Inventory() {
     enabled: isAuthenticated,
   });
 
-  const { data: categories, isLoading } = useQuery(inventoryQuery(token));
-
-  if (isLoading) return <div>Laddar ditt lager...</div>;
+  const { data: InventoryDto, isLoading } = useQuery(inventoryQuery(token!));
+  
+  const { mutate: addToInventory } = useAddToInventory(token!);
 
   const filterButtons = [
     { id: "alla", label: "Alla" },
-    { id: "farska", label: "Färska" },
-    { id: "utgangna", label: "Kort datum" },
+    { id: "färska", label: "Färska" },
+    { id: "utgångna", label: "Utgångna" },
   ];
+
+  if (isLoading) return <div>Laddar ditt lager...</div>;
 
   return (
     <>
-      {/* Debug-ruta: Visar endast om data finns */}
-      {categories && categories.length > 0 && (
-        <div className="bg-yellow-50 border-2 border-yellow-200 p-2 mb-4 text-[10px] rounded font-mono text-black">
-          
-          <p>{categories[0].name}</p>
-          <p>{categories[0].inventoryItems[0]?.inventoryId}</p>
-          <p>{categories[0].inventoryItems[0]?.quantity}</p>
-        </div>
-      )}
-
       <div className="flex flex-col gap-2 w-full max-w-md">
         <label className="input flex items-center gap-2 bg-white text-black border-[#e2001a] border-2 h-10 w-full focus-within:outline-none">
           <svg
@@ -72,7 +65,7 @@ function Inventory() {
               key={btn.id}
               onClick={() => setActiveFilter(btn.id)}
               className={`
-                btn flex-1 min-h-0 h-8 text-xs border-none transition-all
+                btn flex-1 min-h-0 h-8 text-[10px] border-none transition-all
                 ${
                   activeFilter === btn.id
                     ? "bg-[#e2001a] text-white shadow-inner scale-95"
@@ -83,13 +76,27 @@ function Inventory() {
               {btn.label}
             </button>
           ))}
+          
+          <button
+            onClick={() => addToInventory()}
+            className="btn flex-1 min-h-0 h-8 text-[10px] border-none bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all"
+          >
+            Hämta kvitto
+          </button>
         </div>
 
-        <div>
-          {categories?.map((category) => (
-            <div key={category.category}></div>
-          ))}
+          <div>
+          {isAuthenticated ? (
+            <div>
+              {InventoryDto?.map((dto) => (
+                <ItemCard key={dto.category} inventoryDto={dto} token={token!} />
+              ))}
+            </div>
+          ) : (
+            <div>Logga in </div>
+          )}
         </div>
+        
       </div>
     </>
   );

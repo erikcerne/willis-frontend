@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 
 export const Footer = () => {
+
+  
   return (
     <div className="grid grid-cols-5 bg-white border-t border-base-200 h-20 min-h-20 w-full pb-2 shadow-[0_-4px_10px_rgba(0,0,0,0.03)]">
       <Link

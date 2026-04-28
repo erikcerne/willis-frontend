@@ -13,8 +13,16 @@ export interface InventoryDto {
   pic: string;             
 }
 
-export interface ShoppingList {
+export interface ShoppingListDto {
   name: string;
   category: string;
   id: string;
+}
+
+export interface ReceiveInventoryDto {
+  expiryDate: string;
+  produceDate: string;
+  quantity: number;
+  productId: string;
+  userId: string;
 }

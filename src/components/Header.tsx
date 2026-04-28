@@ -1,4 +1,4 @@
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks/useAuth"; 
 
 export const Header = () => {
   const { isAuthenticated, login, logout } = useAuth();
@@ -22,6 +22,10 @@ export const Header = () => {
             />
           </svg>
         </button>
+      </div>
+
+      <div className="navbar-center">
+        <h1 className="text-xl font-semibold text-white">Hem</h1>
       </div>
 
       <div className="navbar-end">
