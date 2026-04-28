@@ -4,6 +4,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import type { InventoryDto, ReceiveInventoryDto } from "../../Types";
+import { MOCK_CARTS } from "./json";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -25,8 +26,6 @@ const getUserIdFromToken = (token: string): string => {
   }
 };
 
-// --- QUERIES ---
-
 export const inventoryQuery = (token: string) => {
   return queryOptions({
     queryKey: ["inventory", token],
@@ -47,14 +46,18 @@ export const useAddToInventory = (token: string) => {
   return useMutation({
     mutationFn: async () => {
       const currentUserId = getUserIdFromToken(token);
+      
+      const randomCartIndex = Math.floor(Math.random() * MOCK_CARTS.length);
+      const selectedCart = MOCK_CARTS[randomCartIndex];
 
-      const randomIndex = Math.floor(Math.random() * MOCK_DATA.length);
-      const baseItem = MOCK_DATA[randomIndex];
+      const itemsWithRealUser: ReceiveInventoryDto[] = selectedCart.map(
+        (item) => ({
+          ...item,
+          userId: currentUserId,
+        }),
+      );
 
-      const itemWithRealUser: ReceiveInventoryDto = {
-        ...baseItem,
-        userId: currentUserId,
-      };
+      console.log(`Laddar upp vagn index: ${randomCartIndex}`, itemsWithRealUser);
 
       const res = await fetch(`${API_BASE_URL}/inventory`, {
         method: "POST",
@@ -62,7 +65,7 @@ export const useAddToInventory = (token: string) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify([itemWithRealUser]),
+        body: JSON.stringify(itemsWithRealUser),
       });
 
       if (!res.ok) throw new Error("Kunde inte lägga till i inventory");
@@ -120,12 +123,3 @@ export const useClearExpiredItems = (token: string) => {
   });
 };
 
-const MOCK_DATA: ReceiveInventoryDto[] = [
-  {
-    expiryDate: "2026-12-24T23:59:59", 
-    produceDate: "2026-11-20T10:00:00", 
-    quantity: 1,
-    productId: "2cb9b8f1-e3ec-4944-8921-21a54421d4a1", 
-    userId: "", 
-  },
-];
