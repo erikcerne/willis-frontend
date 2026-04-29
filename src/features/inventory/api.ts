@@ -46,7 +46,7 @@ export const useAddToInventory = (token: string) => {
   return useMutation({
     mutationFn: async () => {
       const currentUserId = getUserIdFromToken(token);
-      
+
       const randomCartIndex = Math.floor(Math.random() * MOCK_CARTS.length);
       const selectedCart = MOCK_CARTS[randomCartIndex];
 
@@ -57,7 +57,10 @@ export const useAddToInventory = (token: string) => {
         }),
       );
 
-      console.log(`Laddar upp vagn index: ${randomCartIndex}`, itemsWithRealUser);
+      console.log(
+        `Laddar upp vagn index: ${randomCartIndex}`,
+        itemsWithRealUser,
+      );
 
       const res = await fetch(`${API_BASE_URL}/inventory`, {
         method: "POST",
@@ -122,4 +125,3 @@ export const useClearExpiredItems = (token: string) => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["inventory"] }),
   });
 };
-

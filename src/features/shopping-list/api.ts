@@ -1,15 +1,17 @@
-import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  queryOptions,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import type { ShoppingListDto } from "../../Types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-
 
 export const shoppingListQuery = (token: string | undefined) => {
   return queryOptions({
     queryKey: ["shopping", token],
     queryFn: async (): Promise<ShoppingListDto[]> => {
-      const res = await fetch(`${API_BASE_URL}/shopping`, { 
+      const res = await fetch(`${API_BASE_URL}/shopping`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -21,7 +23,7 @@ export const shoppingListQuery = (token: string | undefined) => {
 
       return res.json();
     },
-    enabled: !!token, 
+    enabled: !!token,
   });
 };
 
@@ -50,12 +52,15 @@ export const useAddToShoppingList = (token: string) => {
 
   return useMutation({
     mutationFn: async (inventoryId: string) => {
-      const res = await fetch(`${API_BASE_URL}/shopping?inventoryId=${inventoryId}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        `${API_BASE_URL}/shopping?inventoryId=${inventoryId}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       if (!res.ok) throw new Error("Kunde inte lägga till i inköpslistan");
     },

@@ -38,9 +38,10 @@ export const useAuth = () => {
   return {
     isAuthenticated,
     login: loginWithRedirect,
-    logout: () => logout({ logoutParams: { returnTo: window.location.origin } }),
+    logout: () =>
+      logout({ logoutParams: { returnTo: window.location.origin } }),
     user,
     isLoading,
-    getAccessTokenSilently
+    getAccessTokenSilently,
   };
 };
