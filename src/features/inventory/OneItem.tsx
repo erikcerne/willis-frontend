@@ -62,7 +62,7 @@ export const OneItem = ({ inventoryListDto, token }: { inventoryListDto: Invento
           disabled={isAddingShop}
           className="btn btn-xs flex-1 bg-gray-100 text-gray-700 border-none h-6 min-h-0 text-[9px] disabled:bg-gray-200"
         >
-          {isAddingShop ? <span className="loading loading-spinner loading-xs"></span> : "+ Inköp"}
+          {isAddingShop ? <span className="loading loading-spinner loading-xs"></span> : "+ Inköpslist"}
         </button>
       </div>
     </div>

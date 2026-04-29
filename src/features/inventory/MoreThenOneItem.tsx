@@ -50,7 +50,7 @@ export const MoreThenOneItem = ({ inventoryListDto, token }: { inventoryListDto:
           disabled={isAddingShop}
           className="btn btn-xs flex-1 bg-gray-100 text-gray-700 border-none h-5 min-h-0 text-[9px] disabled:bg-gray-200"
         >
-          {isAddingShop ? <span className="loading loading-spinner loading-xs w-3 h-3"></span> : "+ Inköp"}
+          {isAddingShop ? <span className="loading loading-spinner loading-xs w-3 h-3"></span> : "+ Inköpslista"}
         </button>
       </div>
     </div>
