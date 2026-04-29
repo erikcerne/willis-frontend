@@ -1,7 +1,18 @@
 import { useAuth } from "../hooks/useAuth";
+import { useLocation } from "@tanstack/react-router";
 
 export const Header = () => {
   const { isAuthenticated, login, logout } = useAuth();
+  
+  // Hämta nuvarande URL
+  const location = useLocation();
+
+  // Funktion för att bestämma titeln baserat på URL:en
+  const getPageTitle = (pathname: string) => {
+    if (pathname.includes("/inventory")) return "Skafferi";
+    if (pathname.includes("/shoppingList")) return "Inköpslista";
+    return "Hem";
+  };
 
   return (
     <div className="navbar bg-willys-red text-white shadow-sm min-h-16 px-4">
@@ -25,7 +36,9 @@ export const Header = () => {
       </div>
 
       <div className="navbar-center">
-        <h1 className="text-xl font-semibold text-white">Hem</h1>
+        <h1 className="text-xl font-semibold text-white">
+          {getPageTitle(location.pathname)}
+        </h1>
       </div>
 
       <div className="navbar-end">
