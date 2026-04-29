@@ -37,7 +37,6 @@ function Inventory() {
 
     return InventoryDto
       .map((dto) => {
-        // Filtrera datumen inuti varan
         const filteredItems = dto.inventoryItems.filter((item) => {
           if (activeFilter === "alla") return true;
           
@@ -47,9 +46,7 @@ function Inventory() {
 
         return { ...dto, inventoryItems: filteredItems };
       })
-      // Ta bort varor som inte har några datum kvar efter filtreringen
       .filter((dto) => dto.inventoryItems.length > 0)
-      // Sortera A-Ö på namnet (med svenskt alfabet)
       .sort((a, b) => a.name.localeCompare(b.name, "sv"));
   }, [InventoryDto, activeFilter]);
 

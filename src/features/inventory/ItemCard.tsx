@@ -42,7 +42,7 @@ export const ItemCard = ({
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-1 text-[10px] font-bold text-[#e2001a] bg-red-50 px-2 py-0.5 rounded hover:bg-red-100 transition-colors"
+                className="flex items-center gap-1 text-[10px] font-bold text-[#e2001a] bg-red-50 px-2 py-0.5 rounded hover:bg-red-100 transition-colors mt-3"
               >
                 {isOpen ? "Dölj" : "Visa"}
                 <svg
