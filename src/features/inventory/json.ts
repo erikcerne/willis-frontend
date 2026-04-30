@@ -9,7 +9,7 @@ export const MOCK_CARTS: ReceiveInventoryDto[][] = [
     { produceDate: "2026-04-26T10:00:00", expiryDate: "2026-05-02T23:59:59", quantity: 1, productId: "644ffc67-2f08-4e97-90d2-ebf02a384f47", userId: "" }, // Vispgrädde
     { produceDate: "2026-04-26T10:00:00", expiryDate: "2026-12-01T23:59:59", quantity: 1, productId: "6ca2e10b-a73a-472f-87a0-4ad04c034cee", userId: "" }, // Kanelbullar
     { produceDate: "2024-04-26T10:00:00", expiryDate: "2025-06-10T23:59:59", quantity: 1, productId: "2cb9b8f1-e3ec-4944-8921-21a54421d4a1", userId: "" }, // Bregott
-    { produceDate: "2026-04-26T10:00:00", expiryDate: "2027-01-01T23:59:59", quantity: 2, productId: "1f482d47-7dc6-48ad-b6aa-9eb0c03faba8", userId: "" }, // Majskorn
+    { produceDate: "2026-04-26T10:00:00", expiryDate: "2027-01-09T23:59:59", quantity: 2, productId: "1f482d47-7dc6-48ad-b6aa-9eb0c03faba8", userId: "" }, // Majskorn
   ],
   // VAGN 2: Handlad igår (2026-04-27). Snabb middag. Samma varor som ovan men med ANDRA datum.
   [
