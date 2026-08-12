@@ -172,4 +172,3 @@ npm run build
 - `src/features/shopping-list/api.ts` - shoppinglist-API-anrop
 - `src/hooks/useAuth.ts` - Auth0-autentisering och backend-synk
 
----
