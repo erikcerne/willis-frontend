@@ -157,15 +157,6 @@ npm run build
 - Konfigurera miljövariabler i produktionsmiljön med samma nycklar som i `.env`.
 - Backend måste vara åtkomlig från frontend och acceptera Auth0-token.
 
----
-
-## Framtida vidareutveckling
-
-- Receptgenerator som föreslår maträtter baserat på vad som finns i skafferiet.
-- Notiser för varor som närmar sig bäst-före-datum.
-- QR/2D-kodsintegration för snabb inmatning av nya varor vid köp.
-- Mer avancerad filtrering: kategori, datumintervall och status.
-- Offline-caching och snabbare lokal vy när nätverket är svagt.
 
 ---
 
@@ -182,7 +173,3 @@ npm run build
 - `src/hooks/useAuth.ts` - Auth0-autentisering och backend-synk
 
 ---
-
-## Kontakt
-
-Använd detta repo som utgångspunkt för att bygga en matvaruhanteringsplattform med smarta inköpslistor, hållbarhetsindikatorer och dynamiska varningssystem.
