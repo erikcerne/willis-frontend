@@ -1,5 +1,9 @@
 ﻿# Willis Frontend
 
+🌐 **Live Demo:** [Klicka här för att testa appen](https://willis-frontend-production.up.railway.app/)
+
+🔗 **Backend Repo:** [Se koden för backend här](https://github.com/erikcerne/Willis-backend)
+
 ## Pitch
 
 Den dyraste maten är den du slänger.
@@ -114,13 +118,13 @@ cd willis-frontend
 npm install
 ```
 
-3. Skapa `.env` i projektets rot med följande variabler:
+3. Skapa `.env` i projektets rot med följande variabler. Kontrollera gärna `.env.example` för en mall som matchar produktionsmiljön:
 
 ```env
 VITE_API_BASE_URL=https://din-backend-url
-VITE_AUTH0_DOMAIN=din-auth0-domain
-VITE_AUTH0_CLIENT_ID=din-auth0-client-id
 VITE_AUTH0_AUDIENCE=din-auth0-audience
+VITE_AUTH0_CLIENT_ID=din-auth0-client-id
+VITE_AUTH0_DOMAIN=din-auth0-domain
 ```
 
 4. Starta utvecklingsservern:
