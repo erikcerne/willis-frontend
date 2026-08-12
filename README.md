@@ -1,3 +1,4 @@
+
 ﻿# Willis Frontend
 
 🌐 **Live Demo:** [Klicka här för att testa appen](https://willis-frontend-production.up.railway.app/)
@@ -20,6 +21,8 @@ Det här är frontend-delen av en full-stack lösning för att automatisera matv
 - Låter användaren hantera kvantitet, radera varor och skicka artiklar till inköpslista.
 - Använder Auth0 för inloggning och token-baserad kommunikation med ett Spring Boot-backend.
 
+---
+<img width="1024" height="558" alt="7b0aa8a1-3290-4092-a52b-12b8d99687ca" src="https://github.com/user-attachments/assets/1a7f9d00-6405-4791-a497-f4b24f87b534" />
 ---
 
 ## Tech stack
